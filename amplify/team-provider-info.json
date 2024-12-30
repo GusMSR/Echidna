@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-echidna-dev-e13f1-authRole",
+      "UnauthRoleArn": "arn:aws:iam::503561434528:role/amplify-echidna-dev-e13f1-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::503561434528:role/amplify-echidna-dev-e13f1-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-echidna-dev-e13f1-deployment",
+      "UnauthRoleName": "amplify-echidna-dev-e13f1-unauthRole",
+      "StackName": "amplify-echidna-dev-e13f1",
+      "StackId": "arn:aws:cloudformation:us-east-2:503561434528:stack/amplify-echidna-dev-e13f1/c070ad20-c59a-11ef-8269-0a7e26db1767",
+      "AmplifyAppId": "d1h814z5pejfpz"
+    },
+    "categories": {
+      "auth": {
+        "echidna15ef9393": {}
+      }
+    }
+  }
+}
