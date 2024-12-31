@@ -74,6 +74,10 @@ export default function SignInScreen() {
           Don't have an account? Sign Up!
           </Link>
 
+    <Link href="/PasswordRecovery" style={styles.link}>
+          Forgot Password?
+          </Link>
+
     </View>
   );
 }
@@ -160,5 +164,6 @@ const styles = StyleSheet.create({
   link: {
     color: '#0E79B2',
     fontSize: 14,
+    marginBottom: 20,
   },
 });
