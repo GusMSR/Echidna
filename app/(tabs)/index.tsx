@@ -1,8 +1,10 @@
-import { StyleSheet, Button } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import EditScreenInfo from '@/components/EditScreenInfo';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, View } from '@/components/Themed';
 import { useEffect, useState } from 'react';
 import { router } from 'expo-router';
+import { Calendar, BookOpen, Puzzle } from 'lucide-react-native';
 
 import { Amplify } from 'aws-amplify';
 import amplifyconfig from '../../src/amplifyconfiguration.json';
@@ -37,9 +39,23 @@ export default function TabOneScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>IMPLEMENTAR DESAFIOS</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <Text style={styles.title}>Choose your challenge!</Text>
+      <View style={styles.separator} />
+
+      <TouchableOpacity style={styles.button} onPress={() => { router.push('/Challenges'); /* TODO: Implement Daily Challenge */ }}>
+        <Calendar size={24} color="#fff" />
+        <Text style={styles.buttonText}>Daily</Text>
+      </TouchableOpacity>
+      
+      <TouchableOpacity style={styles.button} onPress={() => { router.push('/Quiz');/* TODO: Implement Thematic Challenge */ }}>
+        <BookOpen size={24} color="#fff" />
+        <Text style={styles.buttonText}>Thematic</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={() => { router.push('/TrainingCicle');/* TODO: Implement Puzzle Challenge */ }}>
+        <Puzzle size={24} color="#fff" />
+        <Text style={styles.buttonText}>Puzzle</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -51,12 +67,30 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
+    marginBottom: 20,
   },
   separator: {
-    marginVertical: 30,
-    height: 1,
+    marginVertical: 20,
+    height: 2,
     width: '80%',
+    backgroundColor: '#444',
+  },
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#0E79B2',
+    padding: 15,
+    borderRadius: 10,
+    width: '80%',
+    marginVertical: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginLeft: 10,
   },
 });

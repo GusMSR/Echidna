@@ -1,12 +1,11 @@
-import { StyleSheet, Button } from 'react-native';
-import EditScreenInfo from '@/components/EditScreenInfo';
+import { StyleSheet, Button, TouchableOpacity, ScrollView } from 'react-native';
 import { Text, View } from '@/components/Themed';
 import { useEffect, useState } from 'react';
 import { Link, router } from 'expo-router';
 
 import { Amplify } from 'aws-amplify';
 import amplifyconfig from '../../src/amplifyconfiguration.json';
-import { getCurrentUser} from 'aws-amplify/auth';
+import { getCurrentUser } from 'aws-amplify/auth';
 
 Amplify.configure(amplifyconfig);
 
@@ -25,6 +24,7 @@ export default function TabThreeScreen() {
       router.replace('/SignIn');
     }
   }
+
   useEffect(() => {
     // Check authentication on component mount
     currentAuthenticatedUser();
@@ -35,15 +35,25 @@ export default function TabThreeScreen() {
     return null; // or return <LoadingSpinner /> if you prefer
   }
 
+  const handleSyncClick = () => {
+    router.push('/Sincronization'); // Redirect to the Synchronization screen
+  };
+
+  const handleGameHistoryClick = () => {
+    router.push('/GameHistory');
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>IMPLEMENTAR SINCRONIZACION Y ANALISIS DE PARTIDA</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/three.tsx" />
+      <TouchableOpacity style={styles.button} onPress={handleSyncClick}>
+        <Text style={styles.buttonText}>Synchronize Accounts</Text>
+      </TouchableOpacity>
 
-      <Link href="/Analysis">
-        TEMPORAL ACCESS TO ANALYSIS PAGE
-      </Link>
+      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      
+      <TouchableOpacity style={styles.historyButton} onPress={handleGameHistoryClick}>
+        <Text style={styles.historyButtonText}>View Game History</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -53,14 +63,49 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#f5f5f5',
   },
-  title: {
-    fontSize: 20,
+  button: {
+    backgroundColor: '#0062ff', // Blue color
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 10,
+    marginBottom: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#fff',
     fontWeight: 'bold',
   },
   separator: {
     marginVertical: 30,
     height: 1,
     width: '80%',
+    backgroundColor: '#ddd',
+  },
+  historyButton: {
+    backgroundColor: '#28a745', // Green color for game history
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 10,
+    marginBottom: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+  },
+  historyButtonText: {
+    fontSize: 18,
+    color: '#fff',
+    fontWeight: 'bold',
   },
 });

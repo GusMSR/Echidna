@@ -1,3 +1,4 @@
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
@@ -42,7 +43,12 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  //return <RootLayoutNav />;
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <RootLayoutNav />
+    </GestureHandlerRootView>
+  );
 }
 
 function RootLayoutNav() {
@@ -56,7 +62,17 @@ function RootLayoutNav() {
         <Stack.Screen name="SignIn" options={{ headerShown: false }} />
         <Stack.Screen name="PasswordRecovery" options={{ headerShown: false }} />
         <Stack.Screen name="ConfirmPasswordRecovery" options={{ headerShown: false }} />
-        <Stack.Screen name="Analysis" options={{ headerShown: false }} />
+        <Stack.Screen name="Analysis" options={{ headerShown: true }} />
+        <Stack.Screen name="Achivements" options={{ headerShown: true }} />
+        <Stack.Screen name="AddGameByHand" options={{ headerShown: true }} />
+        <Stack.Screen name="Calendar" options={{ headerShown: true }} />
+        <Stack.Screen name="Challenges" options={{ headerShown: true }} />
+        <Stack.Screen name="GameHistory" options={{ headerShown: true }} />
+        <Stack.Screen name="PasswordChange" options={{ headerShown: true }} />
+        <Stack.Screen name="Quiz" options={{ headerShown: true }} />
+        <Stack.Screen name="Sincronization" options={{ headerShown: true }} />
+        <Stack.Screen name="Stats" options={{ headerShown: true }} />
+        <Stack.Screen name="TrainingCicle" options={{ headerShown: true }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
