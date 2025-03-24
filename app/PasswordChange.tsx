@@ -12,14 +12,13 @@ export default function PasswordChangeScreen() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   async function currentAuthenticatedUser() {
     try {
       setIsAuthenticated(true);
-      const { username, userId, signInDetails } = await getCurrentUser();
+      const { username } = await getCurrentUser();
       console.log(`The username: ${username}`);
-      console.log(`The userId: ${userId}`);
-      console.log(`The signInDetails: ${signInDetails}`);
     } catch (err) {
       console.log(err);
       router.replace('/SignIn');
@@ -27,21 +26,44 @@ export default function PasswordChangeScreen() {
   }
 
   useEffect(() => {
-    // Check authentication on component mount
     currentAuthenticatedUser();
   }, []);
 
   if (!isAuthenticated) {
-    return null; // or return <LoadingSpinner /> if you prefer
+    return null;
   }
 
-  // Handle password change
+  function validatePassword(password: string) {
+    const requirements = [
+      { regex: /.{8,}/, message: 'Must be at least 8 characters long.' },
+      { regex: /[A-Z]/, message: 'Must contain at least 1 uppercase letter.' },
+      { regex: /\d/, message: 'Must contain at least 1 number.' },
+    ];
+
+    for (const req of requirements) {
+      if (!req.regex.test(password)) return req.message;
+    }
+    return '';
+  }
+
   async function handleUpdatePassword() {
+    setPasswordError('');
+
+    if (newPassword === oldPassword) {
+      setPasswordError('The new password must be different from the old one.');
+      return;
+    }
+
+    const errorMessage = validatePassword(newPassword);
+    if (errorMessage) {
+      setPasswordError(errorMessage);
+      return;
+    }
+
     try {
       await updatePassword({ oldPassword, newPassword });
       Alert.alert('Success', 'Password updated successfully');
-      // Redirect or other actions after successful update
-      router.replace('/four'); // Example redirect
+      router.replace('/four'); 
     } catch (err) {
       console.log(err);
       Alert.alert('Error', 'Failed to update password');
@@ -66,6 +88,7 @@ export default function PasswordChangeScreen() {
         value={newPassword}
         onChangeText={setNewPassword}
       />
+      {passwordError ? <Text style={styles.error}>{passwordError}</Text> : null}
 
       <TouchableOpacity style={styles.submitButton} onPress={handleUpdatePassword}>
         <Text style={styles.submitButtonText}>Update Password</Text>
@@ -94,6 +117,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     paddingLeft: 10,
     borderRadius: 5,
+  },
+  error: {
+    color: 'red',
+    fontSize: 14,
+    marginBottom: 10,
   },
   submitButton: {
     backgroundColor: '#007bff',
