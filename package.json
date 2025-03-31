@@ -22,7 +22,6 @@
     "chess.js": "^1.1.0",
     "expo": "~52.0.23",
     "expo-dev-client": "~5.0.8",
-    "expo-file-system": "~18.0.11",
     "expo-font": "~13.0.2",
     "expo-linking": "~7.0.3",
     "expo-router": "~4.0.15",
@@ -45,7 +44,9 @@
     "react-native-svg": "^15.11.2",
     "react-native-toast-message": "^2.2.1",
     "react-native-vector-icons": "^10.2.0",
-    "react-native-web": "~0.19.13"
+    "react-native-web": "~0.19.13",
+    "expo-file-system": "~18.0.11",
+    "expo-asset": "~11.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

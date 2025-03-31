@@ -1,6 +1,6 @@
 import { Chess, Square } from "chess.js";
 
-import { Position } from "../Utils/chessParser";
+import { Position } from "./chessParser";
 import {
     Classification, 
     centipawnClassifications, 
