@@ -42,6 +42,12 @@
       "eas": {
         "projectId": "7ac980b8-d613-49bb-a45c-7f06bc6f56e7"
       }
+    },
+    "assetPatternsToBeBundled": [
+      "assets/**"
+    ],
+    "packagerOpts": {
+      "assetExts": ["html", "js", "ts", "wasm"]
     }
   }
 }

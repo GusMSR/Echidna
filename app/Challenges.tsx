@@ -35,27 +35,24 @@ export default function ChallengesScreen() {
   }, []);
 
   if (!isAuthenticated) {
-    // return null or a loading spinner while checking authentication
-    return null; // or return <LoadingSpinner /> if you prefer
+    return null;
   }
 
   return (
     <View style={isHorizontal ? styles.horizontalContainer : styles.verticalContainer}>
-      {/* Chessboard on the left */}
       <View style={styles.chessboardContainer}>
-        <Text style={styles.playerName}>Black</Text> {/* TODO: Replace with actual name */}
+        <Text style={styles.playerName}>REPLACE WITH BLACKS NAME</Text> 
         <Chessboard boardSize={400} />
-        <Text style={styles.playerName}>White</Text> {/* TODO: Replace with actual name */}
+        <Text style={styles.playerName}>REPLACE WITH WHITES NAME</Text> 
       </View>
       
-      {/* Challenge info on the right */}
       <View style={styles.infoContainer}>
-        <Text style={styles.challengeType}>Challenge Type: Daily</Text> {/* TODO: Replace with actual challenge type */}
+        <Text style={styles.challengeType}>Challenge Type: GET CHALLENGE TYPE</Text>
         <ScrollView style={styles.pgnBox}>
           <Text style={styles.pgnTitle}>Moves</Text>
           <Text style={styles.pgnContent}>
             {"1. e4     e5\n2. Nf3    Nc6\n3. Bb5    a6\n4. Ba4    Nf6\n5. O-O    Be7"}
-          </Text>{/* TODO: Add PGN moves dynamically and make sure it doesnt get out of the screen*/}
+          </Text>
         </ScrollView>
         <View style={styles.buttonContainer}>
           <Button title="Go to Analysis" onPress={() => { /* TODO: Navigate to analysis page and automatically?*/ }} />

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stockfish WebView</title>
+</head>
+<body>
+    <h1>Stockfish Evaluation WebView</h1>
+    <button onclick="evaluatePositions()">Evaluate FENs</button>
+    <pre id="output"></pre>
+
+    <script type="module" src="evaluation.js"></script><!-- Ensure the compiled JS file is linked -->
+
+    <script>
+        function evaluatePositions() {
+            console.log("Entered Evauate Postitions")
+            //TEST
+            const fenPositions = [
+                "rnbqkb1r/pppppppp/5n2/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+                "r1bqkbnr/pppppppp/2n5/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+            ];
+
+            if (window.evaluateFen) {
+                console.log("Entered evaluate Fen")
+                window.evaluateFen(fenPositions).then(evaluations => {
+                    document.getElementById("output").textContent = JSON.stringify(evaluations, null, 2);
+                    
+                    // Send data to React Native WebView
+                    if (window.ReactNativeWebView) {
+                        console.log("Sent to React native webview")
+                        window.ReactNativeWebView.postMessage(JSON.stringify(evaluations));
+                    }
+                });
+            } else {
+                console.error("evaluateFen is not defined");
+            }
+        }
+
+        // Listen for messages from React Native WebView
+        window.addEventListener("message", (event) => {
+            if (event.data && typeof event.data === "string") {
+                try {
+                    const fenArray = JSON.parse(event.data);
+                    if (Array.isArray(fenArray)) {
+                        window.evaluateFen(fenArray).then(evaluations => {
+                            if (window.ReactNativeWebView) {
+                                window.ReactNativeWebView.postMessage(JSON.stringify(evaluations));
+                            }
+                        });
+                    }
+                } catch (error) {
+                    console.error("Invalid JSON from React Native WebView:", error);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
