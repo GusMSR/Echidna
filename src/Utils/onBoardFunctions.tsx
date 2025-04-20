@@ -168,6 +168,8 @@ export function isPieceHanging(lastFen: string, fen: string, square: Square) {
     let attackers = getAttackers(fen, square);
     let defenders = getDefenders(fen, square);
 
+    if (!lastPiece || !piece) return false;
+
     // If piece was just traded equally or better, not hanging
     if (pieceValues[lastPiece.type] >= pieceValues[piece.type] && lastPiece.color != piece.color) {
         return false;

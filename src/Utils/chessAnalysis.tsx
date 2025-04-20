@@ -1,6 +1,6 @@
 import { Chess, Square } from "chess.js";
 
-import { Position } from "./chessParser";
+import { Move, Position } from "./chessParser";
 import {
     Classification, 
     centipawnClassifications, 
@@ -25,10 +25,7 @@ export interface EngineLine {
 }
 
 export interface EvaluatedPosition extends Position {
-    move?: {
-        san: string;
-        uci: string;
-    };
+    move: Move,
     topLines: EngineLine[],
     cutoffEvaluation?: Evaluation,
     classification?: Classification,
@@ -51,7 +48,7 @@ export interface Report {
 }
 
 export async function analyse(positions: EvaluatedPosition[]): Promise<Report> {
-    
+    console.log("Entered analyse function")
     // Generate classifications for each position
     let positionIndex = 0;
     for (let position of positions.slice(1)) {

@@ -1,12 +1,14 @@
 import { Chess } from "chess.js";
 import pgnParser from "pgn-parser";
 
+export interface Move {
+    san: string,
+    uci: string
+}
+
 export interface Position {
-    fen: string;
-    move?: {
-        san: string;
-        uci: string;
-    };
+    fen: string,
+    move?: Move
 }
 
 export interface ParseResult {

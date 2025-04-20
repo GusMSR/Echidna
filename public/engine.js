@@ -30,11 +30,11 @@ export class Stockfish {
 
         // Add logging to debug worker communication
         this.worker.addEventListener("message", event => {
-            console.log("Worker says:", event.data);  // Log everything the worker sends
+            //console.log("Worker says:", event.data);  // Log everything the worker sends
         });
 
         this.worker.addEventListener("error", event => {
-            console.error("Worker error:", event);
+            //console.error("Worker error:", event);
         });
     }
 

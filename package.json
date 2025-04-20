@@ -19,9 +19,11 @@
     "@react-native-community/netinfo": "^11.4.1",
     "@react-navigation/native": "^7.0.14",
     "aws-amplify": "^6.11.0",
-    "chess.js": "^1.1.0",
+    "chess.js": "^1.2.0",
     "expo": "~52.0.23",
+    "expo-asset": "~11.0.4",
     "expo-dev-client": "~5.0.19",
+    "expo-file-system": "~18.0.11",
     "expo-font": "~13.0.2",
     "expo-linking": "~7.0.3",
     "expo-router": "~4.0.15",
@@ -45,8 +47,6 @@
     "react-native-toast-message": "^2.2.1",
     "react-native-vector-icons": "^10.2.0",
     "react-native-web": "~0.19.13",
-    "expo-file-system": "~18.0.11",
-    "expo-asset": "~11.0.4",
     "react-native-webview": "13.12.5"
   },
   "devDependencies": {

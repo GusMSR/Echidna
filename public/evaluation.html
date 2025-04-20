@@ -7,53 +7,32 @@
 </head>
 <body>
     <h1>Stockfish Evaluation WebView</h1>
-    <button onclick="evaluatePositions()">Evaluate FENs</button>
-    <pre id="output"></pre>
-
     <script type="module" src="evaluation.js"></script><!-- Ensure the compiled JS file is linked -->
 
     <script>
-        function evaluatePositions() {
-            console.log("Entered Evauate Postitions")
-            //TEST
-            const fenPositions = [
-                "rnbqkb1r/pppppppp/5n2/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-                "r1bqkbnr/pppppppp/2n5/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-            ];
+        // Bind a method to window object
+        window.childCallback = function(fenPositions) {
+            console.log('Starting evaluation of FEN positions');
 
-            if (window.evaluateFen) {
-                console.log("Entered evaluate Fen")
-                window.evaluateFen(fenPositions).then(evaluations => {
-                    document.getElementById("output").textContent = JSON.stringify(evaluations, null, 2);
-                    
-                    // Send data to React Native WebView
+            // Send the entire array of FEN positions directly to evaluateFen
+            window.evaluateFen(fenPositions)
+                .then(evaluations => {
+                    // Send results back to the parent window
+                    if (window.parent && typeof window.parent.parentCallback === 'function') {
+                        console.log("Sending the data back to the parent")
+                        window.parent.parentCallback(evaluations);
+                    }
+
+                    // Send the evaluations to React Native WebView if it exists
                     if (window.ReactNativeWebView) {
-                        console.log("Sent to React native webview")
+                        console.log("Sent to React Native WebView");
                         window.ReactNativeWebView.postMessage(JSON.stringify(evaluations));
                     }
+                })
+                .catch(error => {
+                    console.error('Error evaluating FEN positions:', error);
                 });
-            } else {
-                console.error("evaluateFen is not defined");
-            }
-        }
-
-        // Listen for messages from React Native WebView
-        window.addEventListener("message", (event) => {
-            if (event.data && typeof event.data === "string") {
-                try {
-                    const fenArray = JSON.parse(event.data);
-                    if (Array.isArray(fenArray)) {
-                        window.evaluateFen(fenArray).then(evaluations => {
-                            if (window.ReactNativeWebView) {
-                                window.ReactNativeWebView.postMessage(JSON.stringify(evaluations));
-                            }
-                        });
-                    }
-                } catch (error) {
-                    console.error("Invalid JSON from React Native WebView:", error);
-                }
-            }
-        });
+        };
     </script>
 </body>
 </html>

@@ -13,18 +13,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { Stockfish } from "./engine.js";
 
 const engine = new Stockfish();
-let depth = 12;
+let depth = 18;
 let workerCount = 0;
 let positions = [];
 
 if (window.Worker) {
     console.log("Web Workers are supported!");
 } else {
-    console.log("Web Workers are NOT supported in this environment.");
+    console.log("Web Workers are NOT supported in this environment."); //Add an alert to the user somehow
 }
 
 window.evaluateFen = (fenArray) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("Actually entered the js script");
     // Reset tracking variables
     positions = fenArray.map(fen => ({ fen, topLines: [], worker: "" }));
     workerCount = 0;
@@ -55,7 +54,7 @@ window.evaluateFen = (fenArray) => __awaiter(void 0, void 0, void 0, function* (
         }, 10);
     });
 
-    console.log("Evaluated Positions:", positions);
+    //console.log("Evaluated Positions:", positions);
     return positions;
 });
 
