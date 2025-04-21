@@ -10,7 +10,7 @@
     <script type="module" src="evaluation.js"></script><!-- Ensure the compiled JS file is linked -->
 
     <script>
-        // Bind a method to window object
+        // Bind a method to window object (Iframe)
         window.childCallback = function(fenPositions) {
             console.log('Starting evaluation of FEN positions');
 
@@ -33,6 +33,31 @@
                     console.error('Error evaluating FEN positions:', error);
                 });
         };
+
+        //For webView
+        document.addEventListener('message', (event) => {
+            const data = JSON.parse(event.data);
+            console.log('Data received from React Native:', data);
+
+            // Send the entire array of FEN positions directly to evaluateFen
+            window.evaluateFen(data.message)
+                .then(evaluations => {
+                    // Send results back to the parent window
+                    if (window.parent && typeof window.parent.parentCallback === 'function') {
+                        console.log("Sending the data back to the parent")
+                        window.parent.parentCallback(evaluations);
+                    }
+
+                    // Send the evaluations to React Native WebView if it exists
+                    if (window.ReactNativeWebView) {
+                        console.log("Sent to React Native WebView");
+                        window.ReactNativeWebView.postMessage(JSON.stringify(evaluations));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error evaluating FEN positions:', error);
+                });
+        });
     </script>
 </body>
 </html>
