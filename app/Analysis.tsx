@@ -9,6 +9,7 @@ import { getCurrentUser } from 'aws-amplify/auth';
 import Chessboard from 'react-native-chessboard';
 import { parsePGN, ParseResult } from '../src/Utils/chessParser';
 import { EvaluatedPosition, Report, analyse, EngineLine } from '../src/Utils/chessAnalysis';
+import { router } from "expo-router";
 
 Amplify.configure(amplifyconfig);
 
@@ -25,7 +26,7 @@ export default function AnalysisScreen() {
   const [analysisStartedMov, setAnalysisStartedMov] = useState(false);
   const webViewRef = useRef<WebView>(null);
 
-  const pgnContent = "1. e4 d5 2. exd5 Qxd5 3. Nc3 Qa5 4. Nf3 Bg4 5. Be2 Nc6 6. O-O O-O-O 7. d3 e6 8. Be3 Nf6 9. h3 Bh5 10. Ng5 Bg6 11. Nf3 h6 12. Qd2 e5 13. b4 Nxb4 14. a3 Nc6 15. Rab1 e4 16. Nb5 exf3 17. Nxa7+ Nxa7 18. Qxa5 fxe2 19. Rfe1 Nc6 20. Qb5 Bxd3 1-0";
+  const pgnContent = "1. e4 d5 2. exd5 Qxd5 3. Nc3 Qd8 4. d4 Nf6 5. Nf3 Bg4 6. Be2 e6 7. Ne5 Bxe2 8. Qxe2 Nbd7 9. Bg5 Be7 10. h4 Nxe5 1-0";
   let parsedPGN: ParseResult | null = null;
   let positions: String [] = [];
   let evaluatedPositions: EvaluatedPosition[] = [];
@@ -37,13 +38,34 @@ export default function AnalysisScreen() {
       console.log(`Username: ${username}, UserID: ${userId}`);
     } catch (err) {
       console.log(err);
-      // router.replace('/SignIn'); // Redirect
+      router.replace('/SignIn'); // Redirect
     }
   }
 
   useEffect(() => {
     currentAuthenticatedUser();
   }, []);
+
+  const sendPuzzle = async (fen : string, main_line : string) => {
+    try {
+      //CAMBIAR CUANDO SE DESPLIEGUE ESTA MADRE
+      const response = await fetch("http://127.0.0.1:5000/tag", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fen: fen,
+          main_line: main_line, 
+        }),
+      });
+  
+      const data = await response.json();
+      console.log("Tags recibidos:", data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   //Expose function to webview, that's why is outside handleStartAnalysis
     const handleMessage = async (event: any) => {
@@ -128,11 +150,27 @@ export default function AnalysisScreen() {
         };
       });        
 
-      console.log("Before evaluating:");
-      console.log(evaluatedPositions);
+      //console.log("Before evaluating:");
+      //console.log(evaluatedPositions);
       let results: Report = await analyse(evaluatedPositions);
       console.log("Results:");
       console.log(results);
+
+      const relevantTags = ["blunder", "brilliant", "great", "mistake"];
+
+      for (const pos of evaluatedPositions) {
+        const classification = pos.classification?.toLowerCase();
+        if (classification && relevantTags.includes(classification)) {
+          const fen = pos.fen;
+          const mainLine = pos.topLines?.[0]?.moveUCI;
+    
+          if (fen && mainLine) {
+            console.log("Mandando las posiciones relevantes a taggear")
+            await sendPuzzle(fen, mainLine);
+          }
+        }
+      }
+
       setAnalysisStartedWeb(false);
     } catch (error) {
       console.error("Error during analysis:", error);
@@ -142,6 +180,7 @@ export default function AnalysisScreen() {
 
   const handleStartAnalysisMov = async () => {
     // Call the method through webview
+    //AÑADIR FETCH PARA EL TAGGER
     const sendDataToWebView = ( fenArray: String[]) => {
       const data = { message: fenArray};
       webViewRef.current!.postMessage(JSON.stringify(data));

@@ -123,7 +123,7 @@ export async function analyse(positions: EvaluatedPosition[]): Promise<Report> {
 
         let noMate = previousEvaluation.type == "cp" && evaluation.type == "cp";
 
-        // If it is the top line, disregard other detections and give best
+        // If it is the top line give best
         if (topMove.moveUCI == position.move?.uci) {
             position.classification = Classification.BEST;
         } else {

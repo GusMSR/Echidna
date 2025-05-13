@@ -1,0 +1,63 @@
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2023.10.27"]
+[Round "-"]
+[White "Macanas05"]
+[Black "OlegSle"]
+[Result "1-0"]
+[WhiteElo "1638"]
+[BlackElo "1637"]
+[TimeControl "600"]
+[EndTime "15:42:49 GMT+0000"]
+[Termination "Macanas05 won by resignation"]
+
+1. e4 e5 2. d4 exd4 3. Nf3 c5 4. Bc4 Be7 5. O-O Nf6 6. e5 Ng4 7. h3 Nh6 8. c3 d5
+9. exd6 Qxd6 10. cxd4 cxd4 11. Qxd4 Qxd4 12. Nxd4 Be6 13. Nxe6 fxe6 14. Bxe6 Nc6
+15. Nc3 Nd4 16. Bb3 O-O-O 17. Be3 Nhf5 18. Rac1 Nxb3 19. axb3 Kb8 20. Bf4+ Ka8
+21. Nb5 a6 22. Nc7+ Ka7 23. Ne6 Rd3 24. Rc7 Bf6 25. Nc5 Rd5 26. Rxb7+ Ka8 27.
+Rc7 Be5 28. Bxe5 Rxe5 29. Ra1 Kb8 30. Nxa6+ Ka8 31. Nc5+ Kb8 32. Nd7+ Kxc7 33.
+Nxe5 Nd4 34. Ra7+ Kd6 35. Nf7+ 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2023.10.28"]
+[Round "-"]
+[White "Macanas05"]
+[Black "Sangprabu182"]
+[Result "1-0"]
+[WhiteElo "1634"]
+[BlackElo "1565"]
+[TimeControl "600"]
+[EndTime "14:59:02 GMT+0000"]
+[Termination "Macanas05 won by resignation"]
+
+1. e4 c5 2. d4 cxd4 3. Nf3 g6 4. c3 dxc3 5. Nxc3 Bg7 6. Bc4 e6 7. O-O a6 8. Be3
+b5 9. Bb3 Bb7 10. Rc1 Nc6 11. Qd2 Nge7 12. Rfd1 Nb8 13. Bc2 O-O 14. Bh6 d5 15.
+Bxg7 Kxg7 16. exd5 exd5 17. Qd4+ f6 18. Be4 Nbc6 19. Qc5 Ne5 20. Nxd5 Nxf3+ 21.
+Bxf3 Nxd5 22. Bxd5 Bxd5 23. Rxd5 Qe8 24. Rcd1 Rf7 25. Qb6 Qe2 26. R5d2 Qe4 27.
+f3 Qe5 28. Qc6 Re8 29. Qxa6 Rfe7 30. Rd5 Qe3+ 31. Kf1 Qe2+ 32. Kg1 Qc4 33. Qxb5
+Re1+ 34. Rxe1 Rxe1+ 35. Kf2 Qe2+ 36. Qxe2 Rxe2+ 37. Kxe2 1-0
+
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2023.10.28"]
+[Round "-"]
+[White "Macanas05"]
+[Black "estebanbaby"]
+[Result "0-1"]
+[WhiteElo "1670"]
+[BlackElo "1685"]
+[TimeControl "600"]
+[EndTime "2:41:36 GMT+0000"]
+[Termination "estebanbaby won by resignation"]
+
+1. e4 e5 2. d4 Nc6 3. d5 Nce7 4. Nf3 d6 5. Nc3 Bg4 6. Be2 Bxf3 7. Bxf3 Nf6 8.
+Bg5 Nd7 9. Qe2 f6 10. Be3 Ng6 11. h4 Qe7 12. h5 Nf4 13. Bxf4 exf4 14. Nb5 Ne5
+15. h6 Nxf3+ 16. Qxf3 gxh6 17. O-O-O a6 18. Nc3 Qe5 19. Qh5+ Kd7 20. Qf5+ Qxf5
+21. exf5 Re8 22. Rd4 f3 23. gxf3 Kc8 24. Ne4 Re5 25. Rh5 Bg7 26. f4 Re7 27. f3
+Rf7 28. Rc4 Kb8 29. a4 Rg8 30. Kd2 Bf8 31. b4 Rg2+ 32. Ke3 Rg1 33. b5 axb5 34.
+axb5 Rb1 35. Nc3 Rb2 36. Kd3 Rg7 37. Re4 Re7 38. Rxe7 Bxe7 39. Rxh6 Bd8 40. Rxh7
+Rb4 41. Rh4 c6 42. bxc6 bxc6 43. dxc6 Kc7 44. Ne4 Kxc6 45. Rh8 Be7 46. Rc8+ Kd7
+47. Rc4 Rb5 48. Ng3 d5 49. Rd4 Kc6 50. c4 Rb3+ 51. Ke2 dxc4 52. Rxc4+ Kd5 53.
+Ra4 Bd6 54. Nh5 Rb2+ 55. Kd1 Rb1+ 56. Kc2 Rf1 57. Ra3 Bxa3 58. Nxf6+ Kd6 59.
+Ne4+ Ke7 60. f6+ Kf7 61. Kd3 Rxf3+ 62. Kc4 Rxf4 0-1

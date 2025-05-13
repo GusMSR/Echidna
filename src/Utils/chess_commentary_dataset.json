@@ -1,0 +1,10 @@
+[
+    {
+      "instruction": "Player moved Nf3. Stockfish evaluation dropped from +0.3 to -1.2. Best move was e4. Explain the mistake in a helpful tone.",
+      "output": "Playing Nf3 allowed Black to gain early control. A better move would be e4."
+    },
+    {
+      "instruction": "Player moved Qh5. Evaluation dropped from +1.2 to -0.4. Best move was Qd3. Give a gentle explanation.",
+      "output": "Qh5 exposed the queen too early without pressure. Qd3 would have supported your pawn and kept pressure on the diagonal."
+    }
+  ]

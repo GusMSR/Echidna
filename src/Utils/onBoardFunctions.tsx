@@ -41,13 +41,13 @@ export function getAttackers(fen: string, square: Square): InfluencingPiece[] {
     let board = new Chess(fen);
     let piece : any = board.get(square);
 
-    // Set colour to move to opposite of attacked piece
+    // Set color to move to opposite of atacked poiece
     board.load(fen
         .replace(/(?<= )(?:w|b)(?= )/g, piece.color == "w" ? "b" : "w")
         .replace(/ [a-h][1-8] /g, " - ")
     );
 
-    // Find each legal move that captures attacked piece
+    // Find each legal miove that captures atttacked piece
     let legalMoves = board.moves({ verbose: true });
 
     for (let move of legalMoves) {
@@ -60,8 +60,8 @@ export function getAttackers(fen: string, square: Square): InfluencingPiece[] {
         }
     }
 
-    // If there is an opposite king around the attacked piece add him as an attacker
-    // if he is not the only attacker or it is a legal move for the king to capture it
+    // If there is an opposite kinhg around the attacked piece add him as an atacker
+    // if he is not the only attacker or it is a legal miove for the king to capture it
     let oppositeKing: InfluencingPiece | undefined;
     let oppositeColour = piece.color == "w" ? "b" : "w";
 
@@ -117,13 +117,13 @@ export function getDefenders(fen: string, square: Square) {
 
     // If there is an attacker we can test capture the piece with
     if (testAttacker) {
-        // Set player to move to colour of test attacker
+        // Set player to move to color of test attacker
         board.load(fen
             .replace(/(?<= )(?:w|b)(?= )/g, testAttacker.color)
             .replace(/ [a-h][1-8] /g, " - ")
         );
 
-        // Capture the defended piece with the test attacker
+        // Capture the defended piece with the test atacker
         for (let promotion of promotions) {
             try {
                 board.move({
@@ -137,7 +137,7 @@ export function getDefenders(fen: string, square: Square) {
             } catch {}
         }
     } else {
-        // Set player to move to defended piece colour
+        // Set player to move to defended piece color
         board.load(fen
             .replace(/(?<= )(?:w|b)(?= )/g, piece.color)
             .replace(/ [a-h][1-8] /g, " - ")
@@ -175,7 +175,7 @@ export function isPieceHanging(lastFen: string, fen: string, square: Square) {
         return false;
     }
 
-    // If a rook took a minor piece that was only defended by one other
+    // If a rook took a minor piece that was only defendeded by one other
     // minor piece, it was a favourable rook exchange, so rook not hanging
     if (
         piece.type == "r"
