@@ -22,7 +22,7 @@ async function handleSignOut() {
 
 export default function TabOneScreen() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState(''); // Placeholder for logged-in user
+  const [username, setUsername] = useState('');
 
   async function currentAuthenticatedUser() {
     try {
@@ -62,7 +62,7 @@ export default function TabOneScreen() {
       {/* Container for the username */}
       <View style={styles.usernameContainer}>
         {/* <Text style={styles.username}>{username || 'Loading user info...'}</Text>*/}
-        <Text style={styles.username}>Username</Text>
+        <Text style={styles.username}>Profile settings</Text>
       </View>
 
       <View style={styles.separator} />

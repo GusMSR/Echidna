@@ -14,6 +14,9 @@
     "categories": {
       "auth": {
         "echidna15ef9393": {}
+      },
+      "api": {
+        "echidna": {}
       }
     }
   }

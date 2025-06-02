@@ -22,5 +22,9 @@
   },
   "aws_cognito_verification_mechanisms": [
     "EMAIL"
-  ]
+  ],
+  "aws_appsync_graphqlEndpoint": "https://2ghkvxkpwfd35gzpgld4drsp3a.appsync-api.us-east-2.amazonaws.com/graphql",
+  "aws_appsync_region": "us-east-2",
+  "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
+  "aws_appsync_apiKey": "da2-yzt337novbf2nagcyy6orrayeu"
 }

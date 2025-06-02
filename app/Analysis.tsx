@@ -26,7 +26,7 @@ export default function AnalysisScreen() {
   const [analysisStartedMov, setAnalysisStartedMov] = useState(false);
   const webViewRef = useRef<WebView>(null);
 
-  const pgnContent = "1. e4 d5 2. exd5 Qxd5 3. Nc3 Qd8 4. d4 Nf6 5. Nf3 Bg4 6. Be2 e6 7. Ne5 Bxe2 8. Qxe2 Nbd7 9. Bg5 Be7 10. h4 Nxe5 1-0";
+  const pgnContent = "1. e4 e5 2. d4 exd4 3. Nf3 c5 4. Bc4 Be7 5. O-O Nf6 6. e5 Ng4 7. h3 Nh6 8. c3 d5 9. exd6 Qxd6 10. cxd4 cxd4 1-0";
   let parsedPGN: ParseResult | null = null;
   let positions: String [] = [];
   let evaluatedPositions: EvaluatedPosition[] = [];
@@ -35,7 +35,7 @@ export default function AnalysisScreen() {
     try {
       setIsAuthenticated(true);
       const { username, userId, signInDetails } = await getCurrentUser();
-      console.log(`Username: ${username}, UserID: ${userId}`);
+      //console.log(`Username: ${username}, UserID: ${userId}`);
     } catch (err) {
       console.log(err);
       router.replace('/SignIn'); // Redirect
@@ -156,9 +156,9 @@ export default function AnalysisScreen() {
       console.log("Results:");
       console.log(results);
 
+      //TAGGER
       const relevantTags = ["blunder", "brilliant", "great", "mistake"];
-
-      for (const pos of evaluatedPositions) {
+      /*for (const pos of evaluatedPositions) {
         const classification = pos.classification?.toLowerCase();
         if (classification && relevantTags.includes(classification)) {
           const fen = pos.fen;
@@ -169,7 +169,16 @@ export default function AnalysisScreen() {
             await sendPuzzle(fen, mainLine);
           }
         }
-      }
+      }*/
+
+      //Comentarios IA
+      fetch("https://758b-34-125-248-224.ngrok-free.app/predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt: "<s>IMPORTANT: RESPOND ONLY IN THIRD PERSON. Input:\nPlayer moved Rg8. Best move was Re1. Identified Tags: Fork, mate in 2 . Move classification: Blunder . In third person, write a concise and constructive coaching commentary explaining why this move is a blunder, emphasizing the identified tags.\n\nResponse:\n" }),
+        })
+          .then(res => res.json())
+          .then(data => console.log(data.response));
 
       setAnalysisStartedWeb(false);
     } catch (error) {

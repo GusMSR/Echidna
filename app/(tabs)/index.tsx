@@ -7,10 +7,15 @@ import { router } from 'expo-router';
 import { Calendar, BookOpen, Puzzle } from 'lucide-react-native';
 
 import { Amplify } from 'aws-amplify';
+import { generateClient, GraphQLResult } from 'aws-amplify/api';
 import amplifyconfig from '../../src/amplifyconfiguration.json';
 import { getCurrentUser} from 'aws-amplify/auth';
+import { createUser } from '../../src/graphql/mutations';
+import * as queries from '../../src/graphql/queries';
+
 
 Amplify.configure(amplifyconfig);
+const client = generateClient();
 
 export default function TabOneScreen() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -19,22 +24,47 @@ export default function TabOneScreen() {
     try {
       setIsAuthenticated(true);
       const { username, userId, signInDetails } = await getCurrentUser();
-      console.log(`The username: ${username}`);
+      /*console.log(`The username: ${username}`);
       console.log(`The userId: ${userId}`);
-      console.log(`The signInDetails: ${signInDetails}`);
+      console.log(`The signInDetails: ${signInDetails}`);*/
+
+      //Try to insert into database (medio mañoso pero no hay pedoooo)
+      const res = await client.graphql({
+        query: queries.getUser,
+        variables: { id: userId }
+      }) as GraphQLResult<any>;
+
+      //const result = await client.graphql({ query: queries.listUsers });
+      //console.log(result)
+
+      if (!res.data?.getUser) {
+        await client.graphql({
+          query: createUser,
+          variables: {
+            input: {
+              id: userId,
+            }
+          }
+        });
+      }
+
     } catch (err) {
       console.log(err);
       router.replace('/SignIn');
     }
   }
   useEffect(() => {
-    // Check authentication on component mount
+    // Code executed once when app launched
+
+    //Auth
     currentAuthenticatedUser();
+
+    //Refreshed and export new games played (if username changed, check if it had exported games before)
+
   }, []);
 
   if (!isAuthenticated) {
-    // return null or a loading spinner while checking authentication
-    return null; // or return <LoadingSpinner /> if you prefer
+    return null;
   }
 
   return (

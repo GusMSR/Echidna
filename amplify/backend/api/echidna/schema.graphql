@@ -1,0 +1,72 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public }  } # FOR TESTING ONLY!
+
+type User @model @auth(rules: [{ allow: public }, { allow: private } , { allow: owner }]) {
+  id: ID! # PK, Cognito user sub
+  elo: Int
+  activeTrainingCycleID: ID
+  activeTrainingCycle: TrainingCycle @hasOne(fields: ["activeTrainingCycleID"]) # FK to TrainingCycle only one active at a time
+  lichessUsername: String
+  chesscomUsername: String
+  completedAchievementsIDs: [ID]
+}
+
+type TrainingCycle @model @auth(rules: [{ allow: public }, { allow: private } , { allow: owner }]) {
+  id: ID! # PK
+  startDate: AWSDateTime!
+  endDate: AWSDateTime!
+  goals: String!
+}
+
+type Event @model @auth(rules: [{ allow: public }, { allow: private } , { allow: owner }]) {
+  id: ID! # PK
+  TrainingCycleID: ID!
+  TrainingCycle: TrainingCycle @hasOne(fields: ["TrainingCycleID"]) # FK to what training cycle corresponds to
+  date: AWSDateTime!
+  studyType: String! # type of study done
+}
+
+type Game @model @auth(rules: [{ allow: public }, { allow: private } , { allow: owner }]) {
+  id: ID! # PK
+  pgn: String! #The full PGN notation text
+  platform: String! # Lichess, Chess.com, Manual, Challenge
+  date: AWSDateTime
+  result: String! # win/loss/draw (win/loss for challenge)
+  rating: Int #Users rating (machine rating in case of challenge)
+  userColor: String! # color played by user ("white" or "black")
+}
+
+type Analysis @model @auth(rules: [{ allow: public }, { allow: private } , { allow: owner }]) {
+  id: ID! # PK
+  gameID: ID!
+  game: Game @hasOne(fields: ["gameID"]) # FK to Game
+  userID: ID!
+  user: User @hasOne(fields: ["userID"]) # FK to User
+  evaluatedPositions: AWSJSON # List of evaluated and classified positions (json)
+  accuracy: Float
+  aiCommentary: [String] # AI generated commentary
+}
+
+# Static data, no writes after development, public access for dev
+type SampleGame @model @auth(rules: [{ allow: public }, { allow: private } , { allow: owner }]) {
+  id: ID! # PK
+  result: String!
+  rating: Int!
+  evaluatedPositions: [String]!
+  accuracy: Float!
+  aiCommentary: [String]
+}
+
+type Achievement @model @auth(rules: [{ allow: public }, { allow: private } , { allow: owner }]) {
+  id: ID! # PK
+  title: String!
+  description: String!
+}
+
+type Quiz @model @auth(rules: [{ allow: public }, { allow: private } , { allow: owner }]) {
+  id: ID! # PK
+  question: String!
+  options: [String!]!
+}
