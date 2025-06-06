@@ -30,12 +30,11 @@ export default function TrainingCycleScreen() {
   }
 
   useEffect(() => {
-    // Check authentication on component mount
     currentAuthenticatedUser();
   }, []);
 
   if (!isAuthenticated) {
-    return null; // or return a loading spinner if you prefer
+    return null;
   }
 
   const handleSubmit = () => {
@@ -44,7 +43,6 @@ export default function TrainingCycleScreen() {
     console.log(`Game Objective: ${gameObjective}`);
     console.log(`Discipline Objective: ${disciplineObjective}`);
     console.log(`Rating Goal: ${ratingGoal}`);
-    // Handle submission logic here
   };
 
   const handleOptionSelect = (setter: React.Dispatch<React.SetStateAction<any>>, value: string) => {

@@ -22,6 +22,7 @@ export const createUser = /* GraphQL */ `
       }
       lichessUsername
       chesscomUsername
+      lastCheckedGameTime
       completedAchievementsIDs
       createdAt
       updatedAt
@@ -51,6 +52,7 @@ export const updateUser = /* GraphQL */ `
       }
       lichessUsername
       chesscomUsername
+      lastCheckedGameTime
       completedAchievementsIDs
       createdAt
       updatedAt
@@ -80,6 +82,7 @@ export const deleteUser = /* GraphQL */ `
       }
       lichessUsername
       chesscomUsername
+      lastCheckedGameTime
       completedAchievementsIDs
       createdAt
       updatedAt
@@ -227,6 +230,20 @@ export const createGame = /* GraphQL */ `
   ) {
     createGame(input: $input, condition: $condition) {
       id
+      UserID
+      User {
+        id
+        elo
+        activeTrainingCycleID
+        lichessUsername
+        chesscomUsername
+        lastCheckedGameTime
+        completedAchievementsIDs
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
       pgn
       platform
       date
@@ -247,6 +264,20 @@ export const updateGame = /* GraphQL */ `
   ) {
     updateGame(input: $input, condition: $condition) {
       id
+      UserID
+      User {
+        id
+        elo
+        activeTrainingCycleID
+        lichessUsername
+        chesscomUsername
+        lastCheckedGameTime
+        completedAchievementsIDs
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
       pgn
       platform
       date
@@ -267,6 +298,20 @@ export const deleteGame = /* GraphQL */ `
   ) {
     deleteGame(input: $input, condition: $condition) {
       id
+      UserID
+      User {
+        id
+        elo
+        activeTrainingCycleID
+        lichessUsername
+        chesscomUsername
+        lastCheckedGameTime
+        completedAchievementsIDs
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
       pgn
       platform
       date
@@ -290,6 +335,7 @@ export const createAnalysis = /* GraphQL */ `
       gameID
       game {
         id
+        UserID
         pgn
         platform
         date
@@ -308,6 +354,7 @@ export const createAnalysis = /* GraphQL */ `
         activeTrainingCycleID
         lichessUsername
         chesscomUsername
+        lastCheckedGameTime
         completedAchievementsIDs
         createdAt
         updatedAt
@@ -334,6 +381,7 @@ export const updateAnalysis = /* GraphQL */ `
       gameID
       game {
         id
+        UserID
         pgn
         platform
         date
@@ -352,6 +400,7 @@ export const updateAnalysis = /* GraphQL */ `
         activeTrainingCycleID
         lichessUsername
         chesscomUsername
+        lastCheckedGameTime
         completedAchievementsIDs
         createdAt
         updatedAt
@@ -378,6 +427,7 @@ export const deleteAnalysis = /* GraphQL */ `
       gameID
       game {
         id
+        UserID
         pgn
         platform
         date
@@ -396,6 +446,7 @@ export const deleteAnalysis = /* GraphQL */ `
         activeTrainingCycleID
         lichessUsername
         chesscomUsername
+        lastCheckedGameTime
         completedAchievementsIDs
         createdAt
         updatedAt
@@ -510,54 +561,6 @@ export const deleteAchievement = /* GraphQL */ `
       id
       title
       description
-      createdAt
-      updatedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const createQuiz = /* GraphQL */ `
-  mutation CreateQuiz(
-    $input: CreateQuizInput!
-    $condition: ModelQuizConditionInput
-  ) {
-    createQuiz(input: $input, condition: $condition) {
-      id
-      question
-      options
-      createdAt
-      updatedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const updateQuiz = /* GraphQL */ `
-  mutation UpdateQuiz(
-    $input: UpdateQuizInput!
-    $condition: ModelQuizConditionInput
-  ) {
-    updateQuiz(input: $input, condition: $condition) {
-      id
-      question
-      options
-      createdAt
-      updatedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const deleteQuiz = /* GraphQL */ `
-  mutation DeleteQuiz(
-    $input: DeleteQuizInput!
-    $condition: ModelQuizConditionInput
-  ) {
-    deleteQuiz(input: $input, condition: $condition) {
-      id
-      question
-      options
       createdAt
       updatedAt
       owner

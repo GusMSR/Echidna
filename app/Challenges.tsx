@@ -57,11 +57,6 @@ export default function ChallengesScreen() {
         <View style={styles.buttonContainer}>
           <Button title="Go to Analysis" onPress={() => { /* TODO: Navigate to analysis page and automatically?*/ }} />
         </View>
-
-        
-      <Link href="/Analysis">
-        Temporal Access to Analysis Page
-      </Link>
       </View>
     </View>
   );

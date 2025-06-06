@@ -22,6 +22,7 @@ export const onCreateUser = /* GraphQL */ `
       }
       lichessUsername
       chesscomUsername
+      lastCheckedGameTime
       completedAchievementsIDs
       createdAt
       updatedAt
@@ -51,6 +52,7 @@ export const onUpdateUser = /* GraphQL */ `
       }
       lichessUsername
       chesscomUsername
+      lastCheckedGameTime
       completedAchievementsIDs
       createdAt
       updatedAt
@@ -80,6 +82,7 @@ export const onDeleteUser = /* GraphQL */ `
       }
       lichessUsername
       chesscomUsername
+      lastCheckedGameTime
       completedAchievementsIDs
       createdAt
       updatedAt
@@ -227,6 +230,20 @@ export const onCreateGame = /* GraphQL */ `
   ) {
     onCreateGame(filter: $filter, owner: $owner) {
       id
+      UserID
+      User {
+        id
+        elo
+        activeTrainingCycleID
+        lichessUsername
+        chesscomUsername
+        lastCheckedGameTime
+        completedAchievementsIDs
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
       pgn
       platform
       date
@@ -247,6 +264,20 @@ export const onUpdateGame = /* GraphQL */ `
   ) {
     onUpdateGame(filter: $filter, owner: $owner) {
       id
+      UserID
+      User {
+        id
+        elo
+        activeTrainingCycleID
+        lichessUsername
+        chesscomUsername
+        lastCheckedGameTime
+        completedAchievementsIDs
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
       pgn
       platform
       date
@@ -267,6 +298,20 @@ export const onDeleteGame = /* GraphQL */ `
   ) {
     onDeleteGame(filter: $filter, owner: $owner) {
       id
+      UserID
+      User {
+        id
+        elo
+        activeTrainingCycleID
+        lichessUsername
+        chesscomUsername
+        lastCheckedGameTime
+        completedAchievementsIDs
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
       pgn
       platform
       date
@@ -290,6 +335,7 @@ export const onCreateAnalysis = /* GraphQL */ `
       gameID
       game {
         id
+        UserID
         pgn
         platform
         date
@@ -308,6 +354,7 @@ export const onCreateAnalysis = /* GraphQL */ `
         activeTrainingCycleID
         lichessUsername
         chesscomUsername
+        lastCheckedGameTime
         completedAchievementsIDs
         createdAt
         updatedAt
@@ -334,6 +381,7 @@ export const onUpdateAnalysis = /* GraphQL */ `
       gameID
       game {
         id
+        UserID
         pgn
         platform
         date
@@ -352,6 +400,7 @@ export const onUpdateAnalysis = /* GraphQL */ `
         activeTrainingCycleID
         lichessUsername
         chesscomUsername
+        lastCheckedGameTime
         completedAchievementsIDs
         createdAt
         updatedAt
@@ -378,6 +427,7 @@ export const onDeleteAnalysis = /* GraphQL */ `
       gameID
       game {
         id
+        UserID
         pgn
         platform
         date
@@ -396,6 +446,7 @@ export const onDeleteAnalysis = /* GraphQL */ `
         activeTrainingCycleID
         lichessUsername
         chesscomUsername
+        lastCheckedGameTime
         completedAchievementsIDs
         createdAt
         updatedAt
@@ -510,54 +561,6 @@ export const onDeleteAchievement = /* GraphQL */ `
       id
       title
       description
-      createdAt
-      updatedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const onCreateQuiz = /* GraphQL */ `
-  subscription OnCreateQuiz(
-    $filter: ModelSubscriptionQuizFilterInput
-    $owner: String
-  ) {
-    onCreateQuiz(filter: $filter, owner: $owner) {
-      id
-      question
-      options
-      createdAt
-      updatedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const onUpdateQuiz = /* GraphQL */ `
-  subscription OnUpdateQuiz(
-    $filter: ModelSubscriptionQuizFilterInput
-    $owner: String
-  ) {
-    onUpdateQuiz(filter: $filter, owner: $owner) {
-      id
-      question
-      options
-      createdAt
-      updatedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const onDeleteQuiz = /* GraphQL */ `
-  subscription OnDeleteQuiz(
-    $filter: ModelSubscriptionQuizFilterInput
-    $owner: String
-  ) {
-    onDeleteQuiz(filter: $filter, owner: $owner) {
-      id
-      question
-      options
       createdAt
       updatedAt
       owner

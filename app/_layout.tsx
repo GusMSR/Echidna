@@ -69,7 +69,6 @@ function RootLayoutNav() {
         <Stack.Screen name="Challenges" options={{ headerShown: true }} />
         <Stack.Screen name="GameHistory" options={{ headerShown: true }} />
         <Stack.Screen name="PasswordChange" options={{ headerShown: true }} />
-        <Stack.Screen name="Quiz" options={{ headerShown: true }} />
         <Stack.Screen name="Sincronization" options={{ headerShown: true }} />
         <Stack.Screen name="Stats" options={{ headerShown: true }} />
         <Stack.Screen name="TrainingCicle" options={{ headerShown: true }} />

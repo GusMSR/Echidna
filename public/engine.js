@@ -26,7 +26,7 @@ export class Stockfish {
 
     initWorker() {
         this.worker.postMessage("uci");
-        this.worker.postMessage("setoption name MultiPV value 2");
+        this.worker.postMessage("setoption name MultiPV value 2");  
 
         // Add logging to debug worker communication
         this.worker.addEventListener("message", event => {
@@ -62,7 +62,8 @@ export class Stockfish {
                         for (let searchMessage of searchMessages) {
                             let id = parseInt(searchMessage.match(/(?:multipv )(\d+)/)?.[1]);
                             let depth = parseInt(searchMessage.match(/(?:depth )(\d+)/)?.[1]);
-                            let moveUCI = searchMessage.match(/(?: pv )(.+?)(?= |$)/)?.[1];
+                            //let moveUCI = searchMessage.match(/(?: pv )(.+?)(?= |$)/)?.[1];
+                            let moveUCI = searchMessage.match(/ pv (.+)/)?.[1];
                             let evaluation = {
                                 type: searchMessage.includes(" cp ") ? "cp" : "mate",
                                 value: parseInt(searchMessage.match(/(?:(?:cp )|(?:mate ))([\d-]+)/)?.[1] || "0")

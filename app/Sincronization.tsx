@@ -180,7 +180,7 @@ export default function SincronizationScreen() {
           Synchronized: {"\n"}Lichess: {lichessUsername}, Chess.com: {chesscomUsername}
         </Text>
       </View>
-      <Text style={styles.syncWarning}> ⚠️ Warning: synching a new account or changing to a new one might cause your game history to not show for a few hours while your games are being exported</Text>
+      <Text style={styles.syncWarning}> ⚠️ Warning: synching a new account or changing to a new one might cause your game history to not show for a few minutes while your games are being exported</Text>
     </View>
   );
 }

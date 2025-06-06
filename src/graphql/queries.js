@@ -19,6 +19,7 @@ export const getUser = /* GraphQL */ `
       }
       lichessUsername
       chesscomUsername
+      lastCheckedGameTime
       completedAchievementsIDs
       createdAt
       updatedAt
@@ -40,6 +41,7 @@ export const listUsers = /* GraphQL */ `
         activeTrainingCycleID
         lichessUsername
         chesscomUsername
+        lastCheckedGameTime
         completedAchievementsIDs
         createdAt
         updatedAt
@@ -137,6 +139,20 @@ export const getGame = /* GraphQL */ `
   query GetGame($id: ID!) {
     getGame(id: $id) {
       id
+      UserID
+      User {
+        id
+        elo
+        activeTrainingCycleID
+        lichessUsername
+        chesscomUsername
+        lastCheckedGameTime
+        completedAchievementsIDs
+        createdAt
+        updatedAt
+        owner
+        __typename
+      }
       pgn
       platform
       date
@@ -159,6 +175,7 @@ export const listGames = /* GraphQL */ `
     listGames(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        UserID
         pgn
         platform
         date
@@ -182,6 +199,7 @@ export const getAnalysis = /* GraphQL */ `
       gameID
       game {
         id
+        UserID
         pgn
         platform
         date
@@ -200,6 +218,7 @@ export const getAnalysis = /* GraphQL */ `
         activeTrainingCycleID
         lichessUsername
         chesscomUsername
+        lastCheckedGameTime
         completedAchievementsIDs
         createdAt
         updatedAt
@@ -304,40 +323,6 @@ export const listAchievements = /* GraphQL */ `
         id
         title
         description
-        createdAt
-        updatedAt
-        owner
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const getQuiz = /* GraphQL */ `
-  query GetQuiz($id: ID!) {
-    getQuiz(id: $id) {
-      id
-      question
-      options
-      createdAt
-      updatedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const listQuizzes = /* GraphQL */ `
-  query ListQuizzes(
-    $filter: ModelQuizFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listQuizzes(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        question
-        options
         createdAt
         updatedAt
         owner

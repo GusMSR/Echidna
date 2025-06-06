@@ -38,9 +38,9 @@ export default function AddGameByHandScreen() {
     try {
       setIsAuthenticated(true);
       const { username, userId, signInDetails } = await getCurrentUser();
-      console.log(`The username: ${username}`);
+      /*console.log(`The username: ${username}`);
       console.log(`The userId: ${userId}`);
-      console.log(`The signInDetails: ${signInDetails}`);
+      console.log(`The signInDetails: ${signInDetails}`);*/
     } catch (err) {
       console.log(err);
       router.replace('/SignIn');
@@ -94,6 +94,7 @@ const handleSubmitGame = async () => {
 
     if (error instanceof Error) {
       setStatusMessage(error.message);
+      return;
     } else {
       setStatusMessage('An unknown error occurred during move simulation.');
     }
@@ -143,7 +144,9 @@ const handleSubmitGame = async () => {
   }
 
   // === All validations passed ===
+  const {userId} = await getCurrentUser();
   const input = {
+    UserID: userId,
     pgn: gamePgn,
     platform: 'Manual',
     date: gameDate,

@@ -10,6 +10,7 @@ type User @model @auth(rules: [{ allow: public }, { allow: private } , { allow: 
   activeTrainingCycle: TrainingCycle @hasOne(fields: ["activeTrainingCycleID"]) # FK to TrainingCycle only one active at a time
   lichessUsername: String
   chesscomUsername: String
+  lastCheckedGameTime: AWSDateTime
   completedAchievementsIDs: [ID]
 }
 
@@ -30,6 +31,8 @@ type Event @model @auth(rules: [{ allow: public }, { allow: private } , { allow:
 
 type Game @model @auth(rules: [{ allow: public }, { allow: private } , { allow: owner }]) {
   id: ID! # PK
+  UserID: ID!
+  User: User @hasOne(fields: ["UserID"]) # FK to which user it corresponds to
   pgn: String! #The full PGN notation text
   platform: String! # Lichess, Chess.com, Manual, Challenge
   date: AWSDateTime
@@ -63,10 +66,4 @@ type Achievement @model @auth(rules: [{ allow: public }, { allow: private } , { 
   id: ID! # PK
   title: String!
   description: String!
-}
-
-type Quiz @model @auth(rules: [{ allow: public }, { allow: private } , { allow: owner }]) {
-  id: ID! # PK
-  question: String!
-  options: [String!]!
 }
